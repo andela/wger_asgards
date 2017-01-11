@@ -29,15 +29,6 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
-if os.environ.get("DB") == "postgres":
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.db.backends.postgresql',
-            'NAME':     '',
-            'USER':     '',
-        }
-    }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
