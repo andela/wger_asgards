@@ -16,7 +16,7 @@ process under apache with a sqlite database. It is useful to just try it out and
 play around. To start it:
 
 
-```docker run -ti --name wger.apache --publish 8000:80 wger/apache```
+```docker run -ti --name asgards254.apache --publish 8000:80 asgards254/apache```
 
 Then just open http://localhost:8000 and log in as: **admin**, password **admin**
 
