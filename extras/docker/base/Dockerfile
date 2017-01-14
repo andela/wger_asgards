@@ -5,12 +5,12 @@
 # This dockerfile simply installs all common dependencies for the
 # other images and does not do anything on its own.
 #
-# docker build --tag wger/base .
+# docker build --tag asgards254/base .
 #
 
 FROM ubuntu:16.04
 
-MAINTAINER Roland Geider <roland@geider.net>
+MAINTAINER Andela Asgards <asgards@andela.com>
 
 # Install dependencies
 RUN apt-get update;\
