@@ -313,6 +313,9 @@ by the US Department of Agriculture. It is extremely complete, with around
                                                    default=0)
     '''Number of Days for email weight reminder'''
 
+    # New Field for socialauth
+    # social_auth = models.CharField(User, max_length=100, default=True)
+
     @property
     def weight(self):
         '''
