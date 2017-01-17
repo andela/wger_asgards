@@ -55,6 +55,7 @@ def load_language(language_code=None):
         language = Language.objects.get(short_name="en")
 
     cache.set(cache_mapper.get_language_key(language), language)
+    print(language,used_language)
     return language
 
 
