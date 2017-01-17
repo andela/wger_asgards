@@ -45,6 +45,7 @@ from wger.weight.api import views as weight_api_views
 #
 # REST API
 #
+from wger.core.views import user
 
 ### /api/v1 - tastypie - deprecated
 v1_api = Api(api_name='v1')
@@ -150,9 +151,15 @@ urlpatterns = i18n_patterns(
         name='sitemap')
 )
 
+# Because we're using viewsets instead of views, we can automatically generate
+# the URL conf for our API, by simply registering the viewsets with a
+# router class.
+router = routers.DefaultRouter()
+router.register(r'users', user.UserViewSet)
 #
 # URLs without language prefix
 #
+
 urlpatterns += [
     url(r'^robots\.txt$',
         TextTemplateView.as_view(template_name="robots.txt"),
@@ -161,6 +168,8 @@ urlpatterns += [
     url(r'^amazon-manifest\.webapp$', WebappManifestView.as_view(template_name="amazon-manifest.webapp")),
 
     # API
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(v1_api.urls)),
     url(r'^api/v2/exercise/search/$',
         exercises_api_views.search,
