@@ -63,6 +63,10 @@ from wger.gym.models import (
     GymUserConfig,
     Contract
 )
+# Import viewsets
+from rest_framework import viewsets
+# import UserSerializer
+from wger.core.serializers import UserSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -230,7 +234,10 @@ def registration(request):
             user.save()
 
             # Pre-set some values of the user's profile
-            language = Language.objects.get(short_name=translation.get_language())
+            try:
+                language = Language.objects.get(short_name=translation.get_language())
+            except Language.DoesNotExist:
+                language = Language.objects.get(short_name='en')
             user.userprofile.notification_language = language
 
             # Set default gym, if needed
@@ -529,3 +536,9 @@ class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
                                           _('Gym')],
                                  'users': context['object_list']['members']}
         return context
+
+
+# Api endpoint for editing and viewing users
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
