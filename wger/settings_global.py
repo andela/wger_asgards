@@ -31,7 +31,7 @@ SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE':   '',
         'USER':     '',
         'NAME':     '',
         'TEST': {'CHARSET': 'UTF8'}
@@ -329,8 +329,8 @@ THUMBNAIL_ALIASES = {
 #
 # Django compressor
 #
-# STATIC_ROOT = ''
-# STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR
+STATIC_URL = '/static/'
 
 # The default is not DEBUG, override if needed
 # COMPRESS_ENABLED = True
