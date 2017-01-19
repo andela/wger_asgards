@@ -199,8 +199,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
 #
 # Email
 #
@@ -325,12 +323,6 @@ THUMBNAIL_ALIASES = {
     },
 }
 
-
-#
-# Django compressor
-#
-STATIC_ROOT = BASE_DIR
-STATIC_URL = '/static/'
 
 # The default is not DEBUG, override if needed
 # COMPRESS_ENABLED = True
