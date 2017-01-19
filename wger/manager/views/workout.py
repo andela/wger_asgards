@@ -19,15 +19,15 @@ import uuid
 import datetime
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect, HttpResponseForbidden, \
+    HttpResponse
 from django.template.context_processors import csrf
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy, ugettext as _
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DeleteView, UpdateView
-# We will be able to create a ModelResource class
+# module to create ModelResource class
 # to describe how we export resource
 from import_export import resources
 
@@ -52,7 +52,6 @@ from wger.utils.generic_views import (
     WgerDeleteMixin
 )
 from wger.utils.helpers import make_token
-# from django.manager.serializers import WorkoutExportSerializer
 
 
 logger = logging.getLogger(__name__)
