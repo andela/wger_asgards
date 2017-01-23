@@ -31,10 +31,12 @@ SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 DATABASES = {
     'default': {
-        'ENGINE':   '',
-        'USER':     '',
-        'NAME':     '',
-        'TEST': {'CHARSET': 'UTF8'}
+        'ENGINE': '',
+        'USER': '',
+        'NAME': '',
+        'TEST': {
+            'CHARSET': 'UTF8'
+        }
     }
 }
 
