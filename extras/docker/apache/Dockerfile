@@ -2,14 +2,14 @@
 # A wger installation under apache with WSGI
 #
 # Please consult the documentation for usage
-# docker build --tag wger/apache .
-# docker run -ti --name wger.apache --publish 8000:80 wger/apache
+# docker build --tag asgards254/apache .
+# docker run -ti --name asgards254.apache --publish 8000:80 asgards254/apache
 #
 #
 
-FROM wger/base
+FROM asgards254/base
 
-MAINTAINER Roland Geider <roland@geider.net>
+MAINTAINER Andela Asgards <asgards@andela.com>
 EXPOSE 80
 
 # Install dependencies
@@ -22,7 +22,7 @@ RUN a2ensite wger
 
 # Set up the application
 USER wger
-RUN git clone https://github.com/wger-project/wger.git /home/wger/src
+RUN git clone https://github.com/andela/wger_asgards.git /home/wger/src
 
 WORKDIR /home/wger/src
 RUN virtualenv --python python3 /home/wger/venv

@@ -2,17 +2,17 @@
 # Docker image for wger development
 #
 # Please consult the documentation for usage
-# docker build -t wger/devel .
-# docker run -ti --name wger.devel --publish 8000:8000 wger/devel
+# docker build -t asgards254/devel .
+# docker run -ti --name asgards254.devel --publish 8000:8000 asgards254/devel
 # (in docker) source ~/venv/bin/activate
 # (in docker) python manage.py runserver 0.0.0.0:8000
 #
 #
 
 
-FROM wger/base
+FROM asgards254/base
 
-MAINTAINER Roland Geider <roland@geider.net>
+MAINTAINER Andela Asgards <asgards@andela.com>
 EXPOSE 8000
 
 # Install dependencies
@@ -20,7 +20,7 @@ RUN apt-get install -y vim tmux sqlite3
 
 # Set up the application
 USER wger
-RUN git clone https://github.com/wger-project/wger.git /home/wger/src
+RUN git clone https://github.com/andela/wger_asgards.git /home/wger/src
 
 WORKDIR /home/wger/src
 RUN virtualenv --python python3 /home/wger/venv
