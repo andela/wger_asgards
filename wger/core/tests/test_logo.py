@@ -11,7 +11,7 @@ class LogoTestCase(StaticLiveServerTestCase):
     def setUpClass(cls):
         super(StaticLiveServerTestCase, cls).setUpClass()
         cls.browser = webdriver.PhantomJS()
-        cls.browser.implicitly_wait(3)
+        cls.browser.implicitly_wait(10)
 
     @classonlymethod
     def tearDownClass(cls):
@@ -26,7 +26,8 @@ class LogoTestCase(StaticLiveServerTestCase):
         self.browser.get(self.get_full_url('exercise:exercise:overview'))
         logo = self.browser.find_element_by_css_selector('span.name')
         # Get the link
-        logo_link = logo.find_element_by_link_text('wger').get_attribute('href')
+        logo_link = logo.find_element_by_link_text(
+                        'wger').get_attribute('href')
 
         # assert logo link is the link to homepage
         self.assertEqual(logo_link, self.get_full_url('core:dashboard'))
