@@ -63,7 +63,7 @@ INSTALLED_APPS = (
 
     # Social auth package
     'social_django',
-    #'social.apps.django_app.default',
+    # 'social.apps.django_app.default',
 
     # Apps from wger proper
     'wger.core',
