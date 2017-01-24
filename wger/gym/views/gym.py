@@ -90,6 +90,7 @@ class GymUserListView(LoginRequiredMixin, WgerMultiplePermissionRequiredMixin, L
         '''
         Only managers and trainers for this gym can access the members
         '''
+        self.inactive = request.GET.get('inactive') or '0'
         if request.user.has_perm('gym.manage_gyms') \
             or ((request.user.has_perm('gym.manage_gym')
                 or request.user.has_perm('gym.gym_trainer'))
