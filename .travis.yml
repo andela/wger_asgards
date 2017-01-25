@@ -8,9 +8,7 @@ cache:
     - node_modules
     - wger/node_modules
 
-# Use container infrastructure
-# http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
-sudo: false
+sudo: required
 
 # Python versions to test
 python:
