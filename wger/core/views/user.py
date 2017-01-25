@@ -129,6 +129,26 @@ def delete(request, user_pk=None):
 
 	return render(request, 'user/delete_account.html', context)
 
+@login_required()
+def inactivate(request, user_pk=None):
+	'''
+	Deactivate member.
+		1. Get the member user pk in the system.
+		2. In the table auth_user change the is_active column where the id = the provided user pk.
+		3. Reload the same page with the new information.
+	'''
+	if user_pk:
+		user = get_object_or_404(User, pk=user_pk)
+		if user.is_active:
+			user.is_active = 0
+			user.save()
+			print('User ')
+		else:
+			user.is_active = 1
+			user.save()	
+		
+
+	return HttpResponseRedirect('/user/list.html')		
 
 @login_required()
 def trainer_login(request, user_pk):
@@ -527,8 +547,8 @@ class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 										  _('Name'),
 										  _('Last activity'),
 										  _('Gym'),
-										  _('Status'),
-										  _('Deactivate Account'),
+										  _('Account Status'),
+										  _('Change Status'),
 										  _('Delete Account')],
 								 'users': context['object_list']['members']}
 		'''
