@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load staticfiles %}
+{% load wger_extras %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'bower_components/datatables/media/css/dataTables.bootstrap.min.css' %}">
 <script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}" ></script>
@@ -72,10 +74,8 @@ $(document).ready( function () {
 		{% if current_user.obj.get_full_name == 'Administrator'%}
 			{{ '-/-'}}
 		{% else %}
-			<form action="{% url 'core:user:delete' %}" method='POST'>
-				{% csrf_token %}
-				<button type="submit" name="delete" >Delete</button>
-			</form>
+			<a href=" {% url 'core:user:delete' user_pk=current_user.obj.pk %}"> Delete</a>
+			
     
 		{% endif %}
 		
