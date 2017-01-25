@@ -90,7 +90,6 @@ def delete(request, user_pk=None):
 	If no user_pk is present, the user visiting the URL will be deleted, otherwise
 	a gym administrator is deleting a different user
 	'''
-
 	if user_pk:
 		user = get_object_or_404(User, pk=user_pk)
 		form_action = reverse('core:user:delete', kwargs={'user_pk': user_pk})
@@ -529,7 +528,7 @@ class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 										  _('Last activity'),
 										  _('Gym'),
 										  _('Status'),
-										  _('Deactive Account'),
+										  _('Deactivate Account'),
 										  _('Delete Account')],
 								 'users': context['object_list']['members']}
 		'''
