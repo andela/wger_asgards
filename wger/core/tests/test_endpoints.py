@@ -15,7 +15,7 @@ Ensure we can create a new User object
         response = self.client.post(url, data, formart='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 1)
-        self.assertEqual(User.objects.get().name, 'Bomiface')
+        self.assertEqual(User.objects.get().name, 'Boniface')
 
     def view_users(self):
         response = self.client.get('/user/1/')
