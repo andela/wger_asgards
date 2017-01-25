@@ -7,87 +7,87 @@
 <script src="{% static 'bower_components/datatables/media/js/dataTables.bootstrap.min.js' %}" ></script>
 <script>
 $(document).ready( function () {
-	/* Make table sortable */
-	$('#main_member_list').DataTable({
-		paging: false,
-		bFilter: true,
-		bInfo : false
-	});
+    /* Make table sortable */
+    $('#main_member_list').DataTable({
+        paging: false,
+        bFilter: true,
+        bInfo : false
+    });
 });
 </script>
 
 <table class="table table-hover" id="main_member_list">
 <thead>
 <tr>
-	{% for key in user_table.keys %}
-		<th>{{ key }}</th>
-	{% endfor %}
+    {% for key in user_table.keys %}
+        <th>{{ key }}</th>
+    {% endfor %}
 </tr>
 </thead>
 <tbody>
 {% for current_user in user_table.users %}
 <tr>
-	<td>
-		{{current_user.obj.pk}}
-	</td>
-	<td>
-		<a href="{% url 'core:user:overview' current_user.obj.pk %}">{{current_user.obj}}</a>
-	</td>
-	<td>
-		{{current_user.obj.get_full_name}}
-	</td>
-	<td data-order="{{current_user.last_log|date:'U'}}">
-		{{current_user.last_log|default:'-/-'}}
-	</td>
-	{% if show_gym %}
-	<td>
-		{% if current_user.obj.userprofile.gym_id %}
-			<a href="{{ current_user.obj.userprofile.gym.get_absolute_url }}">
-			{{ current_user.obj.userprofile.gym }}
-			</a>
-		{% else %}
-			-/-
-		{% endif %}
-	</td>
-	<td>
-		{#This is used to show the active status of the current member #}
-		{% if current_user.obj.get_full_name == 'Administrator'%}
-			{{ '-/-'}}
-		{% else %}
-			{% if current_user.obj.is_active%}
-				{{ 'Active' }} 
-			{% else %}
-				{{ 'Inactive' }} 
-			{% endif %}
-			
-		{% endif %}       
-	</td>
-	<td>
-		{% if current_user.obj.get_full_name == 'Administrator'%}
-			{{  '-/-' }}
-		{% else %}
-			{% if current_user.obj.is_active%}
-				<a href=" {% url 'core:user:inactivate' user_pk=current_user.obj.pk %}"> Deactivate</a> 
-			{% else %}
-				<a href=" {% url 'core:user:inactivate' user_pk=current_user.obj.pk %}"> Activate</a> 
-			{% endif %}
-			
-			
+    <td>
+        {{current_user.obj.pk}}
+    </td>
+    <td>
+        <a href="{% url 'core:user:overview' current_user.obj.pk %}">{{current_user.obj}}</a>
+    </td>
+    <td>
+        {{current_user.obj.get_full_name}}
+    </td>
+    <td data-order="{{current_user.last_log|date:'U'}}">
+        {{current_user.last_log|default:'-/-'}}
+    </td>
+    {% if show_gym %}
+    <td>
+        {% if current_user.obj.userprofile.gym_id %}
+            <a href="{{ current_user.obj.userprofile.gym.get_absolute_url }}">
+            {{ current_user.obj.userprofile.gym }}
+            </a>
+        {% else %}
+            -/-
+        {% endif %}
+    </td>
+    <td>
+        {#This is used to show the active status of the current member #}
+        {% if current_user.obj.get_full_name == 'Administrator'%}
+            {{ '-/-'}}
+        {% else %}
+            {% if current_user.obj.is_active%}
+                {{ 'Active' }} 
+            {% else %}
+                {{ 'Inactive' }} 
+            {% endif %}
+            
+        {% endif %}       
+    </td>
+    <td>
+        {% if current_user.obj.get_full_name == 'Administrator'%}
+            {{  '-/-' }}
+        {% else %}
+            {% if current_user.obj.is_active%}
+                <a href=" {% url 'core:user:inactivate' user_pk=current_user.obj.pk %}"> Deactivate</a> 
+            {% else %}
+                <a href=" {% url 'core:user:inactivate' user_pk=current_user.obj.pk %}"> Activate</a> 
+            {% endif %}
+            
+            
     
-		{% endif %}
-		
-	</td>
-	<td>
-		{% if current_user.obj.get_full_name == 'Administrator'%}
-			{{ '-/-'}}
-		{% else %}
-			<a href=" {% url 'core:user:delete' user_pk=current_user.obj.pk %}"> Delete</a>
-			
+        {% endif %}
+        
+    </td>
+    <td>
+        {% if current_user.obj.get_full_name == 'Administrator'%}
+            {{ '-/-'}}
+        {% else %}
+            <a href=" {% url 'core:user:delete' user_pk=current_user.obj.pk %}"> Delete</a>
+            
     
-		{% endif %}
-		
-	</td>
-	{% endif %}
+        {% endif %}
+        
+    </td>
+    {% endif %}
 </tr>
 {% endfor %}
 </tbody>
