@@ -128,6 +128,7 @@ class GymUserListView(LoginRequiredMixin, WgerMultiplePermissionRequiredMixin, L
         context['user_count'] = len(context['object_list']['members'])
         context['user_table'] = {'keys': [_('ID'), _('Username'), _('Name'), _('Last activity')],
                                  'users': context['object_list']['members']}
+        context['inactive'] = self.request.GET.get('inactive', '0')
         return context
 
 
