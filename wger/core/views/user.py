@@ -140,11 +140,7 @@ def inactivate(request, user_pk=None):
     '''
     if user_pk:
         user = get_object_or_404(User, pk=user_pk)
-        if user.is_active:
-            user.is_active = 0
-        else:
-            user.is_active = 1
-        
+        user.is_active = 0 if user.is_active else 1
         user.save()
 
     return HttpResponseRedirect('/user/list.html')      
