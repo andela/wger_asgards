@@ -546,10 +546,6 @@ class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
                                           _('Change Status'),
                                           _('Delete Account')],
                                  'users': context['object_list']['members']}
-        '''
-        Add the status label => to show the status of the current user. Admin is always active.
-        Set active is 'is_active' in the 'auth_user'. Default for now is Active. { testing purposes }
-        '''
         context['status'] = 'Active'                        
         return context
 
