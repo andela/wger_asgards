@@ -90,7 +90,6 @@ class GymUserListView(LoginRequiredMixin, WgerMultiplePermissionRequiredMixin, L
         '''
         Only managers and trainers for this gym can access the members
         '''
-        self.inactive = request.GET.get('inactive') or '0'
         if request.user.has_perm('gym.manage_gyms') \
             or ((request.user.has_perm('gym.manage_gym')
                 or request.user.has_perm('gym.gym_trainer'))
@@ -129,7 +128,7 @@ class GymUserListView(LoginRequiredMixin, WgerMultiplePermissionRequiredMixin, L
         context['user_count'] = len(context['object_list']['members'])
         context['user_table'] = {'keys': [_('ID'), _('Username'), _('Name'), _('Last activity')],
                                  'users': context['object_list']['members']}
-        context['inactive'] = self.inactive
+        context['inactive'] = self.request.GET.get('inactive', '0')
         return context
 
 
