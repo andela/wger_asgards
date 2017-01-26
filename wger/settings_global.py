@@ -63,7 +63,7 @@ INSTALLED_APPS = (
 
     # Social auth package
     'social_django',
-    #'social.apps.django_app.default',
+    # 'social.apps.django_app.default',
 
     # Apps from wger proper
     'wger.core',
@@ -400,13 +400,13 @@ WGER_SETTINGS = {
 }
 
 # Facebook configuration
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ['FACEBOOK_KEY']
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['FACEBOOK_SECRET']
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('FACEBOOK_SECRET')
 
 # Twitter configuration
-SOCIAL_AUTH_TWITTER_KEY = os.environ['TWITTER_KEY']
-SOCIAL_AUTH_TWITTER_SECRET = os.environ['TWITTER_SECRET']
+SOCIAL_AUTH_TWITTER_KEY = os.getenv('TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = os.getenv('TWITTER_SECRET')
 
 # Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ['GOOGLE_KEY']
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['GOOGLE_SECRET']
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_SECRET')
