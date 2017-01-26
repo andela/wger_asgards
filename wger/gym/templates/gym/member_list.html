@@ -15,6 +15,30 @@
 
 {% block content %}
 {% if perms.gym.manage_gym or perms.gym.gym_trainer %}
+    <div id="userfilter" class="col-sm-8">
+        {% block userfilter %}
+            {% if perms.gym.change_gym %}
+                <div class="btn-group pull-left">
+                    <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+                        {% if inactive == '0' %}
+                            {% trans "Active Users" %}
+                        {% else %}
+                            {% trans "Inactive Users" %}
+                        {% endif %}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="/en/gym/{{gym.id}}/members">Active Users</a>
+                        </li>
+                        <li>
+                            <a href="/en/gym/{{gym.id}}/members?inactive=1">Inactive Users</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
     {% include 'gym/partial_user_list.html' %}
 {% endif %}
 
