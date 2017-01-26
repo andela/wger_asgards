@@ -8,9 +8,7 @@ cache:
     - node_modules
     - wger/node_modules
 
-# Use container infrastructure
-# http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
-sudo: false
+sudo: required
 
 # Python versions to test
 python:
@@ -25,6 +23,14 @@ env:
   - TEST_MOBILE=True  DB=sqlite     TRAVIS_NODE_VERSION="4"
   - TEST_MOBILE=False DB=postgresql TRAVIS_NODE_VERSION="4"
   - TEST_MOBILE=False DB=sqlite     TRAVIS_NODE_VERSION="4"
+
+
+before_install:
+  # install PhantomsJS v2.1.1 on Travis
+  - mkdir travis-phantomjs
+  - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+  - tar -xvf $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs
+  - export PATH=$PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
 
 # Install the application
 install:
