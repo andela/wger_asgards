@@ -32,6 +32,8 @@ from wger.utils.units import AbstractWeight
 
 from wger.weight.models import WeightEntry
 
+from wger.gym.helpers import is_any_gym_admin
+
 
 @python_2_unicode_compatible
 class Language(models.Model):
@@ -478,7 +480,6 @@ by the US Department of Agriculture. It is extremely complete, with around
         check the user permission 
         levels here and return True if s/he has admin permissions else False
         '''
-        from wger.gym.helpers import is_any_gym_admin
         if is_any_gym_admin(self.user):
           return True
         else:
