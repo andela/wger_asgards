@@ -473,6 +473,19 @@ by the US Department of Agriculture. It is extremely complete, with around
         return self
 
 
+    def is_admin(self): 
+        '''
+        check the user permission 
+        levels here and return True if s/he has admin permissions else False
+        '''
+        from wger.gym.helpers import is_any_gym_admin
+        if is_any_gym_admin(self.user):
+          return True
+        else:
+          return False  
+
+
+
 @python_2_unicode_compatible
 class UserCache(models.Model):
     '''
