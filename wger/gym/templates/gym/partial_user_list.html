@@ -71,21 +71,14 @@ $(document).ready( function () {
             {% else %}
                 <a href=" {% url 'core:user:inactivate' user_pk=current_user.obj.pk %}"> Activate</a> 
             {% endif %}
-            
-            
-    
         {% endif %}
-        
     </td>
     <td>
         {% if current_user.obj.userprofile.is_admin %}
             {{ '-/-'}}
         {% else %}
             <a href=" {% url 'core:user:delete' user_pk=current_user.obj.pk %}"> Delete</a>
-            
-    
         {% endif %}
-        
     </td>
     {% endif %}
 </tr>
