@@ -64,6 +64,7 @@ from wger.gym.models import (
     Contract
 )
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -141,12 +142,10 @@ def inactivate(request, user_pk=None):
         user = get_object_or_404(User, pk=user_pk)
         if user.is_active:
             user.is_active = 0
-            user.save()
-            print('User ')
         else:
             user.is_active = 1
-            user.save() 
         
+        user.save()
 
     return HttpResponseRedirect('/user/list.html')      
 
