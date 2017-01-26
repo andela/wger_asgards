@@ -64,6 +64,7 @@ from wger.gym.models import (
     Contract
 )
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -90,7 +91,6 @@ def delete(request, user_pk=None):
     If no user_pk is present, the user visiting the URL will be deleted, otherwise
     a gym administrator is deleting a different user
     '''
-
     if user_pk:
         user = get_object_or_404(User, pk=user_pk)
         form_action = reverse('core:user:delete', kwargs={'user_pk': user_pk})
@@ -130,6 +130,20 @@ def delete(request, user_pk=None):
 
     return render(request, 'user/delete_account.html', context)
 
+@login_required()
+def inactivate(request, user_pk=None):
+    '''
+    Deactivate member.
+        1. Get the member user pk in the system.
+        2. In the table auth_user change the is_active column where the id = the provided user pk.
+        3. Reload the same page with the new information.
+    '''
+    if user_pk:
+        user = get_object_or_404(User, pk=user_pk)
+        user.is_active = 0 if user.is_active else 1
+        user.save()
+
+    return HttpResponseRedirect('/user/list.html')      
 
 @login_required()
 def trainer_login(request, user_pk):
@@ -520,12 +534,18 @@ class UserListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         '''
         Pass other info to the template
         '''
+        
         context = super(UserListView, self).get_context_data(**kwargs)
         context['show_gym'] = True
         context['user_table'] = {'keys': [_('ID'),
                                           _('Username'),
                                           _('Name'),
                                           _('Last activity'),
-                                          _('Gym')],
+                                          _('Gym'),
+                                          _('Account Status'),
+                                          _('Change Status'),
+                                          _('Delete Account')],
                                  'users': context['object_list']['members']}
+        context['status'] = 'Active'                        
         return context
+

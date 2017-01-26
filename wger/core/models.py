@@ -33,6 +33,8 @@ from wger.utils.units import AbstractWeight
 from wger.weight.models import WeightEntry
 
 
+
+
 @python_2_unicode_compatible
 class Language(models.Model):
     '''
@@ -471,6 +473,19 @@ by the US Department of Agriculture. It is extremely complete, with around
         Returns the object that has owner information
         '''
         return self
+
+
+    def is_admin(self): 
+        '''
+        check the user permission 
+        levels here and return True if s/he has admin permissions else False
+        '''
+        from wger.gym.helpers import is_any_gym_admin
+        if is_any_gym_admin(self.user):
+          return True
+        else:
+          return False  
+
 
 
 @python_2_unicode_compatible

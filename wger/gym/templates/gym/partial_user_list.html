@@ -1,4 +1,6 @@
-{% load i18n staticfiles %}
+{% load i18n %}
+{% load staticfiles %}
+{% load wger_extras %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'bower_components/datatables/media/css/dataTables.bootstrap.min.css' %}">
 <script src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}" ></script>
@@ -24,6 +26,60 @@ $(document).ready( function () {
 </thead>
 <tbody>
 {% for current_user in user_table.users %}
+<tr>
+    <td>
+        {{current_user.obj.pk}}
+    </td>
+    <td>
+        <a href="{% url 'core:user:overview' current_user.obj.pk %}">{{current_user.obj}}</a>
+    </td>
+    <td>
+        {{current_user.obj.get_full_name}}
+    </td>
+    <td data-order="{{current_user.last_log|date:'U'}}">
+        {{current_user.last_log|default:'-/-'}}
+    </td>
+    {% if show_gym %}
+    <td>
+        {% if current_user.obj.userprofile.gym_id %}
+            <a href="{{ current_user.obj.userprofile.gym.get_absolute_url }}">
+            {{ current_user.obj.userprofile.gym }}
+            </a>
+        {% else %}
+            -/-
+        {% endif %}
+    </td>
+    <td>
+        {#This is used to show the active status of the current member #}
+        {% if current_user.obj.userprofile.is_admin %}
+            {{ '-/-' }}
+        {% else %}
+            {% if current_user.obj.is_active%}
+                {{ 'Active' }} 
+            {% else %}
+                {{ 'Inactive' }} 
+            {% endif %}
+            
+        {% endif %}       
+    </td>
+    <td>
+        {% if current_user.obj.userprofile.is_admin %}
+            {{  '-/-' }}
+        {% else %}
+            {% if current_user.obj.is_active%}
+                <a href=" {% url 'core:user:inactivate' user_pk=current_user.obj.pk %}"> Deactivate</a> 
+            {% else %}
+                <a href=" {% url 'core:user:inactivate' user_pk=current_user.obj.pk %}"> Activate</a> 
+            {% endif %}
+        {% endif %}
+    </td>
+    <td>
+        {% if current_user.obj.userprofile.is_admin %}
+            {{ '-/-'}}
+        {% else %}
+            <a href=" {% url 'core:user:delete' user_pk=current_user.obj.pk %}"> Delete</a>
+        {% endif %}
+    </td>
 {% if inactive == '0' %}
     {% if current_user.obj.is_active %}
         <tr>
