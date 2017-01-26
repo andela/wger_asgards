@@ -51,8 +51,8 @@ $(document).ready( function () {
     </td>
     <td>
         {#This is used to show the active status of the current member #}
-        {% if current_user.obj.get_full_name == 'Administrator'%}
-            {{ '-/-'}}
+        {% if current_user.obj.userprofile.is_admin %}
+            {{ '-/-' }}
         {% else %}
             {% if current_user.obj.is_active%}
                 {{ 'Active' }} 
@@ -63,7 +63,7 @@ $(document).ready( function () {
         {% endif %}       
     </td>
     <td>
-        {% if current_user.obj.get_full_name == 'Administrator'%}
+        {% if current_user.obj.userprofile.is_admin %}
             {{  '-/-' }}
         {% else %}
             {% if current_user.obj.is_active%}
@@ -78,7 +78,7 @@ $(document).ready( function () {
         
     </td>
     <td>
-        {% if current_user.obj.get_full_name == 'Administrator'%}
+        {% if current_user.obj.userprofile.is_admin %}
             {{ '-/-'}}
         {% else %}
             <a href=" {% url 'core:user:delete' user_pk=current_user.obj.pk %}"> Delete</a>
